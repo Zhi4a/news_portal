@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from .res import TYPE
+from .res import *
 
 
 class Autor(models.Model):
@@ -10,12 +10,12 @@ class Autor(models.Model):
 
     def update_rating(self):
         self.rating = 0
-        for post in Post.objects.filter(author=self):
+        for post in Post.objects.filter(autor_id=self.id):
             self.rating += post.rating * 3
-            for comment in Comment.objects.filter(post=post):
-                self.rating += comment.comment_rating
-        for comment in Comment.objects.filter(user=self.user):
-            self.rating += comment.comment_rating
+            for comment in Comment.objects.filter(post_id=post.id):
+                self.rating += comment.rating
+        for comment in Comment.objects.filter(user_id=self.user):
+            self.rating += comment.rating
         self.save()
 
 
@@ -24,7 +24,7 @@ class Category(models.Model):
 
 
 class Post(models.Model):
-    _type = models.CharField(max_length=2, choices=TYPE, default='NW')
+    _type = models.CharField(max_length=2, choices=TYPE, default=news)
     time = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=255)
     text = models.TextField()
