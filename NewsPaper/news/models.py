@@ -45,7 +45,7 @@ class Post(models.Model):
         self.save()
 
     def __str__(self):
-        return self.title
+        return f'{self.title}: {self.text[:20]}'
 
 
 class PostCategory(models.Model):
