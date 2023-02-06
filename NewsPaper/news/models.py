@@ -1,6 +1,9 @@
+import time
+
 from django.db import models
 from django.contrib.auth.models import User
 from .res import *
+from datetime import datetime
 
 
 class Autor(models.Model):
@@ -45,7 +48,7 @@ class Post(models.Model):
         self.save()
 
     def __str__(self):
-        return f'{self.title}: {self.text[:20]}'
+        return f'{self.title}: {time.strftime("%d.%m.%Y")}: {self.text[:20]}'
 
 
 class PostCategory(models.Model):
