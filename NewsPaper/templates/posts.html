@@ -1,10 +1,34 @@
 {% extends 'flatpages/default.html' %}
+{% load custom_filters %}
 
 {% block title %}
 Posts
 {% endblock title %}
 
 {% block content %}
-<h1>Все посты</h1>
-{{ posts }}
+   <h1>Все посты</h1>
+   <hr>
+   {% if posts %}
+    <h5>Всего: {{ posts|length }}</h5>
+       <table>
+           <tr>
+               <td>Заголовок</td>
+               <td>Дата</td>
+               <td>Текст</td>
+               <td>Рэйтинг</td>
+           </tr>
+
+           {% for post in posts %}
+           <tr>
+               <td>{{ post.title|currency }}</td>
+               <td>{{ post.time|date:'d M Y' }}</td>
+               <td>{{ post.text|truncatechars:20|currency }}</td>
+               <td>{{ post.rating }}</td>
+           </tr>
+           {% endfor %}
+
+       </table>
+   {% else %}
+       <h2>Пусто :(</h2>
+   {% endif %}
 {% endblock content %}

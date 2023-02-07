@@ -1,13 +1,14 @@
 {% extends 'flatpages/default.html' %}
+{% load custom_filters %}
 
 {% block title %}
 Post
 {% endblock title %}
 
 {% block content %}
-<h1>{{ post.title }}</h1>
+<h1>{{ post.title|currency }}</h1>
 <h6>{{ post.time|date:'d M Y' }}</h6>
-<h4>{{ post.text }}</h4>
+<h4>{{ post.text|currency }}</h4>
 <h6>Рейтинг: {{ post.rating }}</h6>
 <h6>Автор: {{ post.autor.user }} </h6>
 
