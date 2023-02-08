@@ -2,7 +2,7 @@
 {% load custom_filters %}
 
 {% block title %}
-Post
+"{{ post.title }}"
 {% endblock title %}
 
 {% block content %}
@@ -10,6 +10,6 @@ Post
 <h6>{{ post.time|date:'d M Y' }}</h6>
 <h4>{{ post.text|currency }}</h4>
 <h6>Рейтинг: {{ post.rating }}</h6>
-<h6>Автор: {{ post.autor.user }} </h6>
+<h6>Автор: {{ post.author.user }} </h6>
 
 {% endblock content %}

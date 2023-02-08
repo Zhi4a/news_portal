@@ -1,19 +1,17 @@
 import time
-
 from django.db import models
 from django.contrib.auth.models import User
 from .res import *
-from datetime import datetime
 
 
-class Autor(models.Model):
+class Author(models.Model):
     rating = models.FloatField(default=0)
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def update_rating(self):
         self.rating = 0
-        for post in Post.objects.filter(autor_id=self.id):
+        for post in Post.objects.filter(author_id=self.id):
             self.rating += post.rating * 3
             for comment in Comment.objects.filter(post_id=post.id):
                 self.rating += comment.rating
@@ -27,13 +25,13 @@ class Category(models.Model):
 
 
 class Post(models.Model):
-    _type = models.CharField(max_length=2, choices=TYPE, default=news)
+    typ = models.CharField(max_length=2, choices=TYPE, default=news)
     time = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=255)
     text = models.TextField()
     rating = models.FloatField(default=0)
 
-    autor = models.ForeignKey(Autor, on_delete=models.CASCADE)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)
     category = models.ManyToManyField(Category, through='PostCategory')
 
     def preview(self):

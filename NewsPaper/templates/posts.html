@@ -2,11 +2,15 @@
 {% load custom_filters %}
 
 {% block title %}
-Posts
+Поиск в публикациях
 {% endblock title %}
 
 {% block content %}
    <h1>Все публикации</h1>
+   <form action="" method="get">
+       {{ filterset.form.as_p }}
+       <input type="submit" value="Найти" />
+   </form>
    <hr>
    {% if posts %}
     <h5>Всего: {{ posts|length }}</h5>
@@ -32,4 +36,24 @@ Posts
    {% else %}
        <h2>Пусто :(</h2>
    {% endif %}
+
+
+   {% if page_obj.has_previous %}
+       <a href="?page=1">1</a>
+       {% if page_obj.previous_page_number != 1 %}
+           ...
+           <a href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+       {% endif %}
+   {% endif %}
+
+   {{ page_obj.number }}
+
+   {% if page_obj.has_next %}
+       <a href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+       {% if paginator.num_pages != page_obj.next_page_number %}
+           ...
+           <a href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
+       {% endif %}
+   {% endif %}
+
 {% endblock content %}
