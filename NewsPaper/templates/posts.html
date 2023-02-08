@@ -6,7 +6,7 @@ Posts
 {% endblock title %}
 
 {% block content %}
-   <h1>Все посты</h1>
+   <h1>Все публикации</h1>
    <hr>
    {% if posts %}
     <h5>Всего: {{ posts|length }}</h5>
@@ -24,6 +24,7 @@ Posts
                <td>{{ post.time|date:'d M Y' }}</td>
                <td>{{ post.text|truncatechars:20|currency }}</td>
                <td>{{ post.rating }}</td>
+               <td><a class="nav-link" href="/posts/{{ post.id }}">перейти</a></td>
            </tr>
            {% endfor %}
 
