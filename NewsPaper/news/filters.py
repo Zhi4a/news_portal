@@ -1,4 +1,4 @@
-from django_filters import FilterSet
+from django_filters import FilterSet, ModelChoiceFilter
 from .models import Post
 
 
@@ -7,6 +7,6 @@ class PostFilter(FilterSet):
        model = Post
        fields = {
            'title': ['icontains'],
-           #'typ': [],
-           'time': ['gt']
+           'typ': ['exact'],
+           'time': ['gt'],
        }
