@@ -8,10 +8,25 @@
 
 {% block content %}
    <h1>Все публикации</h1>
-   <form action="" method="get">
-       {{ filterset.form.as_p }}
-       <input type="submit" value="Найти" />
-   </form>
+    <form action="" method="get">
+        <p>
+            <label for="id_title__icontains">Заголовок:</label>
+            <input type="text" name="title__icontains" id="id_title__icontains">
+        </p>
+        <p>
+            <label for="id_typ">Тип:</label>
+            <select name="typ" id="id_typ">
+                <option value="" selected>Любой</option>
+                <option value="AR">Статья</option>
+                <option value="NW">Новость</option>
+            </select>
+        </p>
+        <p>
+            <label for="id_time__gt">Позже даты:</label>
+            <input type="date" name="time__gt" value="2023-02-09" id="id_time__gt">
+        </p>
+        <input type="submit" value="Найти" />
+    </form>
    <hr>
    {% if posts %}
        <table>
