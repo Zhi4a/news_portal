@@ -4,6 +4,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from .models import Post
 from .filters import PostFilter
 from .forms import *
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class PostList(ListView):
@@ -41,7 +42,7 @@ class NewsCreate(CreateView):
         return super().form_valid(form)
 
 
-class NewsUpdate(UpdateView):
+class NewsUpdate(UpdateView, LoginRequiredMixin):
     form_class = NewsForm
     model = Post
     template_name = 'news_edit.html'
@@ -64,7 +65,7 @@ class ArticlesCreate(CreateView):
         return super().form_valid(form)
 
 
-class ArticlesUpdate(UpdateView):
+class ArticlesUpdate(UpdateView, LoginRequiredMixin):
     form_class = NewsForm
     model = Post
     template_name = 'articles_edit.html'
