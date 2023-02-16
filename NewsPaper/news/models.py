@@ -25,6 +25,7 @@ class Author(models.Model):
         return f'{self.user.username}'
 
 
+
 class Category(models.Model):
     category = models.CharField(max_length=255, unique=True)
 
