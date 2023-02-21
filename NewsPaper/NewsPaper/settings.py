@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'protect',
+    'news.apps.NewsConfig',
 ]
 
 MIDDLEWARE = [
