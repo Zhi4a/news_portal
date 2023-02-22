@@ -1,10 +1,27 @@
-from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Post
+from .models import Post, Category
 from .filters import PostFilter
 from .forms import *
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+
+
+@login_required
+def subscribe(request, pk):
+    user = request.user
+    cat = Category.objects.get(id=pk)
+    cat.subscribers.add(user)
+    return redirect('#')
+
+
+@login_required
+def unsubscribe(request, pk):
+    user = request.user
+    cat = Category.objects.get(id=pk)
+    cat.subscribers.remove(user)
+    return redirect('#')
 
 
 class PostList(ListView):
