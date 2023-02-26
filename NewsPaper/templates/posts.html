@@ -39,11 +39,10 @@
 
            {% for post in posts %}
            <tr>
-               <td><a class="nav-link" href="/posts/{{ post.id }}">{{ post.title|currency }}</a>></td>
+               <td><a class="nav-link" href="/posts/{{ post.id }}">{{ post.title|currency }}</a></td>
                <td>{{ post.time|date:'d M Y' }}</td>
                <td>{{ post.text|truncatechars:20|currency }}</td>
                <td>{{ post.rating }}</td>
-               <td>{{ post.category }}</td>
            </tr>
            {% endfor %}
 

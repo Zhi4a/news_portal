@@ -13,7 +13,7 @@ def subscribe(request, pk):
     user = request.user
     cat = Category.objects.get(id=pk)
     cat.subscribers.add(user)
-    return redirect('#')
+    return redirect('/posts/')
 
 
 @login_required
@@ -21,7 +21,7 @@ def unsubscribe(request, pk):
     user = request.user
     cat = Category.objects.get(id=pk)
     cat.subscribers.remove(user)
-    return redirect('#')
+    return redirect('/posts/')
 
 
 class PostList(ListView):

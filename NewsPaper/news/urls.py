@@ -13,4 +13,7 @@ urlpatterns = [
    path('articles/edit/', ArticlesCreate.as_view(), name='articles_edit'),
    path('articles/<int:pk>/update/', ArticlesUpdate.as_view(), name='articles_update'),
    path('articles/<int:pk>/delete/', ArticlesDelete.as_view(), name='articles_delete'),
+
+   path('<int:pk>/subscribe/', subscribe, name='subscribe'),
+   path('<int:pk>/unsubscribe/', unsubscribe, name='unsubscribe'),
 ]
